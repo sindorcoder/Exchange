@@ -1,28 +1,20 @@
 import { Button, InputGroup } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { useGetCourseQuery } from "../../redux/api/getCourse";
 import { useState } from "react";
 import ModalComponent from "../modal/Modal";
+import { filterData } from "../../helpers/";
+import { useGetCourseQuery } from "../../redux/api/getCourse";
 
 const Main = () => {
-  const { data } = useGetCourseQuery();
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  let conversion;
-  if (data?.conversion_rates || typeof data?.conversion_rates === "object") {
-    conversion =
-      data &&
-      Object.entries(data?.conversion_rates)
-        .filter(([rate]) => rate !== null && rate !== undefined)
-        .map(([currency, rate]) => ({ currency, rate }));
-  }
+  const { data } = useGetCourseQuery();
+  const conversion = filterData(data);
 
   return (
     <>
-      <section className="w-[100%] p-4 bg-white rounded-2xl">
+      <section className="w-full">
         <div className="flex items-center justify-between">
           <InputGroup className="mb-3  !w-[25%]">
             <Form.Control
@@ -42,15 +34,14 @@ const Main = () => {
             Create
           </Button>
         </div>
-        <div>
+        <div className="flex items-center gap-5 justify-center mt-3">
           {conversion &&
             conversion.map((item: any, index: number) => (
-              <>
-                <div className="flex items-center gap-2">
-                  <p key={index}>{item.currency}</p>
+              
+                <div key={index} className="flex items-center gap-2">
+                  <p>{item.currency}</p>
                   <p>{item.rate}</p>
                 </div>
-              </>
             ))}
         </div>
       </section>

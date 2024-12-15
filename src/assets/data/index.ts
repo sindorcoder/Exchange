@@ -54,6 +54,15 @@ function generateDates(startYear: number, endYear: number) {
   return dates;
 }
 
+let newDate = new Date();
+let date = newDate.getDate();
+let month = newDate.getMonth() + 1;
+let year = newDate.getFullYear();
+
+export const toDay: any = `${year}${"-"}${
+  month < 10 ? `0${month}` : `${month}`
+}${"-"}${date}`;
+
 const startYear = 2023;
 const endYear = 2030;
 export const allDates = generateDates(startYear, endYear);
