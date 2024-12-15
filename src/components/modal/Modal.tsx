@@ -18,6 +18,8 @@ const ModalComponent = ({
     amount: 0,
     comment: "",
   });
+
+  console.log(data)
   
   const handleSubmit = (e: any) => {
     e.preventDefault()

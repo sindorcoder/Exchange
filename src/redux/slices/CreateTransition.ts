@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: any = {
-  totalAmount: totalAmount(
-    JSON.parse(localStorage.getItem("expense-history") as string) || [],
-    JSON.parse(localStorage.getItem("income-history") as string) || []
-  ),
-  transactionHistory: {
-    expense:
-      JSON.parse(localStorage.getItem("expense-history") as string) || [],
-    income: JSON.parse(localStorage.getItem("income-history") as string) || [],
-  },
+  // totalAmount: totalAmount(
+  //   JSON.parse(localStorage.getItem("expense-history") as string) || [],
+  //   JSON.parse(localStorage.getItem("income-history") as string) || []
+  // ),
+  // transactionHistory: {
+  //   expense:
+  //     JSON.parse(localStorage.getItem("expense-history") as string) || [],
+  //   income: JSON.parse(localStorage.getItem("income-history") as string) || [],
+  // },
 };
 
 const transactionSlice = createSlice({
