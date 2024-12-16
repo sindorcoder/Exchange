@@ -1,4 +1,4 @@
-let currenciesArray = ["USD", "UZS", "EUR"];
+let currenciesArray = ["USD", "UZS", "EUR", "RUB"];
 
 export function filterData(data: any) {
   let conversion = data?.conversion_rates

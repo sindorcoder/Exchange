@@ -1,5 +1,4 @@
-import { Button, InputGroup } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 import { useState } from "react";
 import ModalComponent from "../modal/Modal";
 import { filterData } from "../../helpers/";
@@ -13,22 +12,37 @@ const Main = () => {
   const handleShow = () => setShow(true);
   const { data } = useGetCourseQuery();
   const conversion: any = filterData(data);
-  const {totalAmount} = useSelector((state: any) => state.transaction);
+  const {
+    transactionHistory: { income, expense },
+  } = useSelector((state: any) => state.transaction);
+
+  const incomeLabels = income.map((item: any) => item.category);
+  const incomeData = income.map((item: any) => item.amount);
+
+  const dataChart = {
+    labels: incomeLabels,
+    datasets: [
+      {
+        label: "Incomes",
+        data: incomeData,
+        fill: false,
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgba(75, 192, 192, 0.2)",
+      },
+      {
+        label: "Expenses",
+        data: expense.map((item: any) => item.amount),
+        fill: false,
+        backgroundColor: "rgb(255, 99, 132)",
+        borderColor: "rgba(255, 99, 132, 0.2)",
+      },
+    ],
+  };
 
   return (
     <>
       <section className="w-full">
-        <div className="flex items-center justify-between">
-          <InputGroup className="mb-3  !w-[25%]">
-            <Form.Control
-              placeholder="Search Exchange"
-              aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-            <InputGroup.Text id="inputGroup-sizing-sm">
-              <i className="bi bi-search"></i>
-            </InputGroup.Text>
-          </InputGroup>
+        <div className="flex items-center justify-end">
           <Button
             onClick={() => handleShow()}
             variant="primary"
@@ -45,14 +59,9 @@ const Main = () => {
                 <p>{item.rate}</p>
               </div>
             ))}
-          <div className="flex justify-end w-full items-center gap-3">
-            <h2 className="text-[30px]">Total Amount</h2>
-            <span className="mt-[1px]">{totalAmount}$</span>
-          </div>
         </div>
-        <div>
-          <CHartComponent />
-        </div>
+        <CHartComponent dataChart={dataChart} />
+        <div></div>
       </section>
       <ModalComponent show={show} handleClose={handleClose} />
     </>

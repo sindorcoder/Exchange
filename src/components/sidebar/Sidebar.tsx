@@ -24,6 +24,17 @@ const Sidebar = () => {
         <li>
           <Link
             style={
+              pathname === "/balance" ? { backgroundColor: "#003049" } : {}
+            }
+            className="text-white py-2 px-2 rounded-xl flex items-center duration-300 gap-2 no-underline hover:bg-[#003049] text-[18px]"
+            to={"/balance"}
+          >
+            <i className="bi bi-database-fill"></i> Balance
+          </Link>
+        </li>
+        <li>
+          <Link
+            style={
               pathname === "/history" ? { backgroundColor: "#003049" } : {}
             }
             className="text-white py-2 px-2 rounded-xl flex items-center duration-300 gap-2 no-underline hover:bg-[#003049] text-[18px]"
