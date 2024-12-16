@@ -33,6 +33,7 @@ export const category = [
   { name: "Festivals & Celebrations" }, // Bayramlar va tadbirlar
   { name: "Loans & EMI" }, // Kreditlar va to'lovlar
   { name: "Miscellaneous" }, // Turli xarajatlar
+
 ];
 
 function generateDates(startYear: number, endYear: number) {
