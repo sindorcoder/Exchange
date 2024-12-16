@@ -1,5 +1,12 @@
+import { useSelector } from "react-redux";
+import TableComponent from "../../components/table/Table";
+
 const History = () => {
-  return <div>History</div>;
+  const data = useSelector((state: any) => state.transaction)
+
+  return <>
+    <TableComponent data={data} />
+  </>;
 };
 
 export default History;

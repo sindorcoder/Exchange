@@ -1,15 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: any = {
-  // totalAmount: totalAmount(
-  //   JSON.parse(localStorage.getItem("expense-history") as string) || [],
-  //   JSON.parse(localStorage.getItem("income-history") as string) || []
-  // ),
-  // transactionHistory: {
-  //   expense:
-  //     JSON.parse(localStorage.getItem("expense-history") as string) || [],
-  //   income: JSON.parse(localStorage.getItem("income-history") as string) || [],
-  // },
+  totalAmount:
+    (JSON.parse(localStorage.getItem("expense-history") as string) || [],
+    JSON.parse(localStorage.getItem("income-history") as string) || []),
+  transactionHistory: {
+    expense:
+      JSON.parse(localStorage.getItem("expense-history") as string) || [],
+    income: JSON.parse(localStorage.getItem("income-history") as string) || [],
+  },
 };
 
 const transactionSlice = createSlice({
@@ -18,7 +17,7 @@ const transactionSlice = createSlice({
   reducers: {
     createTransaction: (state, action: PayloadAction<any>) => {
       const payload = action.payload;
-      switch (payload.expense_or_income) {
+      switch (payload.exchange) {
         case "income":
           state.totalAmount += payload.amount;
           state.transactionHistory.income.push(payload);

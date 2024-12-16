@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "../api/index";
-
+import transactionHistoryReducer from "../slices/CreateTransition";
 const store = configureStore({
   reducer: {
+    transaction: transactionHistoryReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

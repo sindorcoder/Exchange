@@ -1,8 +1,9 @@
 import { Button, Form } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import { category, toDay } from "../../assets/data";
-import { allDates } from "../../assets/data";
+import { allDates, category } from "../../assets/data";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createTransaction } from "../../redux/slices/CreateTransition";
 
 const ModalComponent = ({
   show,
@@ -11,6 +12,7 @@ const ModalComponent = ({
   show: boolean;
   handleClose: boolean | any;
 }) => {
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     exchange: "",
     date: 0,
@@ -19,16 +21,20 @@ const ModalComponent = ({
     comment: "",
   });
 
-  console.log(data)
-  
   const handleSubmit = (e: any) => {
-    e.preventDefault()
-
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setData((prev) => ({
       ...prev,
-      [name]: value
-    }))
+      [name]: value,
+    }));
+  };
+
+  const handleSend = (e: any) => {
+    e.preventDefault();
+    const id = Math.floor(Math.random() * 1000).toString();
+
+    const transactionData = { ...data, id };
+    dispatch(createTransaction(transactionData));
   };
 
   return (
@@ -43,15 +49,23 @@ const ModalComponent = ({
         <Modal.Title>Create Exchange</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSend}>
           <div className="flex items-center gap-5">
             <Form.Group
               className="mb-3 w-full"
               controlId="exampleForm.ControlInput1"
             >
               <Form.Label>Select Exchange</Form.Label>
-              <Form.Select name="exchange" onChange={handleSubmit}>
-                <option value="expence">Expence</option>
+              <Form.Select
+                required
+                name="exchange"
+                defaultValue={"disabled"}
+                onChange={handleSubmit}
+              >
+                <option value="disabled" disabled>
+                  select exchange
+                </option>
+                <option value="expense">Expence</option>
                 <option value="income">Income</option>
               </Form.Select>
             </Form.Group>
@@ -60,7 +74,7 @@ const ModalComponent = ({
               controlId="exampleForm.ControlInput1"
             >
               <Form.Label>Select Date</Form.Label>
-              <Form.Select name="date" onChange={handleSubmit} value={toDay}>
+              <Form.Select required name="date" onChange={handleSubmit}>
                 {allDates.map((item: number | any, index: number) => {
                   return (
                     <option key={index} value={item}>
@@ -73,7 +87,7 @@ const ModalComponent = ({
           </div>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Select Category</Form.Label>
-            <Form.Select name="category" onChange={handleSubmit}>
+            <Form.Select required name="category" onChange={handleSubmit}>
               {category.map((item: { name: string }, index: number) => {
                 return (
                   <option key={index} value={item.name}>
@@ -86,18 +100,28 @@ const ModalComponent = ({
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Enter Amount</Form.Label>
-            <Form.Control name="amount" onChange={handleSubmit} type="number" />
+            <Form.Control
+              required
+              name="amount"
+              onChange={handleSubmit}
+              type="number"
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label className="capitalize">leave a comment</Form.Label>
-            <Form.Control name="comment" onChange={handleSubmit} as="textarea" rows={2} />
+            <Form.Control
+              required
+              name="comment"
+              onChange={handleSubmit}
+              as="textarea"
+              rows={2}
+            />
           </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-          >
-            Create
-          </Button>
+          <div className="flex items-center justify-end">
+            <Button variant="primary" type="submit">
+              Create
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

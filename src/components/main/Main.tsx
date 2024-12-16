@@ -10,7 +10,7 @@ const Main = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { data } = useGetCourseQuery();
-  const conversion = filterData(data);
+  const conversion: any = filterData(data);
 
   return (
     <>
@@ -34,14 +34,13 @@ const Main = () => {
             Create
           </Button>
         </div>
-        <div className="flex items-center gap-5 justify-center mt-3">
+        <div className="flex items-center gap-5 mt-3">
           {conversion &&
             conversion.map((item: any, index: number) => (
-              
-                <div key={index} className="flex items-center gap-2">
-                  <p>{item.currency}</p>
-                  <p>{item.rate}</p>
-                </div>
+              <div key={index} className="flex items-end gap-2">
+                <h2 className="text-[36px]">{item.currency}</h2>
+                <p>{item.rate}</p>
+              </div>
             ))}
         </div>
       </section>
