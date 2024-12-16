@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import { useDispatch } from "react-redux";
 import { deleteTransaction } from "../../redux/slices/CreateTransition";
 import { allDates, category } from "../../assets/data";
+import { ITransaction } from "../../types";
 
 const TableComponent = ({ data }: any) => {
   const [type, setType] = useState("expence");
@@ -75,7 +76,7 @@ const TableComponent = ({ data }: any) => {
             className="max-w-[200px] my-4 md:m-0"
           >
             <option value="">All Dates</option>
-            {allDates.map((item: any, index: number) => (
+            {allDates.map((item: string, index: number) => (
               <option key={index} value={item}>
                 {item}
               </option>
@@ -87,7 +88,7 @@ const TableComponent = ({ data }: any) => {
             className="max-w-[200px] my-4 md:m-0 "
           >
             <option value="">All Categories</option>
-            {category.map((item: any, index: number) => (
+            {category.map((item: {name: string}, index: number) => (
               <option key={index} value={item.name}>
                 {item.name}
               </option>
@@ -112,7 +113,7 @@ const TableComponent = ({ data }: any) => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((item: any) => (
+            {filteredData.map((item: ITransaction) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.exchange}</td>

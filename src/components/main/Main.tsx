@@ -5,6 +5,7 @@ import { filterData } from "../../helpers/";
 import { useGetCourseQuery } from "../../redux/api/getCourse";
 import CHartComponent from "../chart/Chart";
 import { useSelector } from "react-redux";
+import { ITransaction } from "../../types";
 
 const Main = () => {
   const [show, setShow] = useState(false);
@@ -14,12 +15,12 @@ const Main = () => {
   const conversion: any = filterData(data);
   const {
     transactionHistory: { income, expense },
-  } = useSelector((state: any) => state.transaction);
+  } = useSelector((state: ITransaction) => state.transaction);
 
-  const incomeLabels = income.map((item: any) => item.category);
-  const incomeData = income.map((item: any) => item.amount);
-  const expenseLabels = expense.map((item: any) => item.category);
-  const expenseData = expense.map((item: any) => item.amount);
+  const incomeLabels = income.map((item: ITransaction) => item.category);
+  const incomeData = income.map((item: ITransaction) => item.amount);
+  const expenseLabels = expense.map((item: ITransaction) => item.category);
+  const expenseData = expense.map((item: ITransaction) => item.amount);
   const dataChart = {
     labels: [incomeLabels, expenseLabels],
     datasets: [
@@ -55,7 +56,7 @@ const Main = () => {
         <div className="flex flex-wrap items-center gap-5 mt-3">
 
           {conversion &&
-            conversion.map((item: any, index: number) => (
+            conversion.map((item: ITransaction, index: number) => (
               <div key={index} className="flex w-full max-w-[100px] items-end gap-2">
                 <h2 className="text-[18px] md:text-[36px]">{item.currency}</h2>
                 <p className="text-[14px]">{item.rate}</p>

@@ -1,26 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IPayload, ITransaction } from "../../types";
 
-const Amount = (expense: any, income: any) => {
+const Amount = (expense: IPayload, income: IPayload) => {
   return (
-    income.reduce((acc: number, b: any) => (acc += b.amount), 0) -
-    expense.reduce((acc: number, b: any) => (acc += b.amount), 0)
+    income.reduce((acc: number, b: IPayload) => (acc += b.amount), 0) -
+    expense.reduce((acc: number, b: IPayload) => (acc += b.amount), 0)
   );
 };
 
-const expenceAmount = (expense: any, income: any) => {
+const expenceAmount = (expense: IPayload, income: IPayload) => {
   return (
-    expense.reduce((acc: number, b: any) => (acc += b.amount), 0),
-    income.reduce((acc: number, b: any) => (acc += b.amount), 0)
+    expense.reduce((acc: number, b: IPayload) => (acc += b.amount), 0),
+    income.reduce((acc: number, b: IPayload) => (acc += b.amount), 0)
   );
 };
-const incomeAmount = (expense: any, income: any) => {
+const incomeAmount = (expense: IPayload , income: IPayload) => {
   return (
-    income.reduce((acc: number, b: any) => (acc += b.amount), 0),
-    expense.reduce((acc: number, b: any) => (acc += b.amount), 0)
+    income.reduce((acc: number, b: IPayload) => (acc += b.amount), 0),
+    expense.reduce((acc: number, b: IPayload) => (acc += b.amount), 0)
   );
 };
 
-const initialState: any = {
+const initialState: IPayload = {
   totalAmount: Amount(
     JSON.parse(localStorage.getItem("expense-history") as string) || [],
     JSON.parse(localStorage.getItem("income-history") as string) || []
@@ -35,17 +36,17 @@ const initialState: any = {
   ),
 
   transactionHistory: {
-    expense:
-      JSON.parse(localStorage.getItem("expense-history") as string) || [],
+    expense: JSON.parse(localStorage.getItem("expense-history") as string) || [],
     income: JSON.parse(localStorage.getItem("income-history") as string) || [],
   },
+  amount: 0
 };
 
 const transactionSlice = createSlice({
   name: "transaction-history",
   initialState,
   reducers: {
-    createTransaction: (state, action: PayloadAction<any>) => {
+    createTransaction: (state, action: PayloadAction<ITransaction>) => {
       const payload = action.payload;
       switch (payload.exchange) {
         case "income":
@@ -66,7 +67,7 @@ const transactionSlice = createSlice({
           break;
       }
     },
-    deleteTransaction: (state, action: PayloadAction<any>) => {
+    deleteTransaction: (state, action: PayloadAction<ITransaction>) => {
       const payload = action.payload;
       switch (payload.exchange) {
         case "income":

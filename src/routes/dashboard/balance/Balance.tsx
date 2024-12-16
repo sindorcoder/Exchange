@@ -2,13 +2,14 @@ import { useSelector } from "react-redux";
 import CircleChat from "../../../components/circleChart/CircleChat";
 import { filterData } from "../../../helpers";
 import { useGetCourseQuery } from "../../../redux/api/getCourse";
+import { ITransaction } from "../../../types";
 
 const Balance = () => {
   const { data } = useGetCourseQuery();
   const conversion: any = filterData(data);
 
   const { totalAmount, expenceAmount, incomeAmount } = useSelector(
-    (state: any) => state.transaction
+    (state: ITransaction) => state.transaction
   );
 
   const dataChart = {
@@ -58,7 +59,7 @@ const Balance = () => {
         </span>
         <div className="flex flex-wrap w-full justify-center items-center gap-5 mt-3">
           {conversion &&
-            conversion.map((item: any, index: number) => (
+            conversion.map((item: ITransaction, index: number) => (
               <div
                 key={index}
                 className="flex w-full max-w-[100px] items-end gap-2"
