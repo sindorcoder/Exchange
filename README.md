@@ -4,6 +4,9 @@
 <a  href="https://exchange-sable.vercel.app/">Site Url</a>
 </div>
 <p>
+When you enter the site, you will see a create button and a graph showing your income and expenses. On the balance page, you will see an overview of all your activities. On the history page, you will see a list of your income and expenses.
+</p>
+<p>
   bu loyihani qilishda unchalik muammolarga duch kelmadim lekin meni eng qiynagan joyi grafiklar boldi chunki zamonaviy va creativ grafik topaolmadim bunga oxshash loyihani ikkinchi marotaba qilishim lekin oldingi loyihamga qaraganda ancha konikma orttirdim deb oylayman chunki oldingi loyihani men ustozim komagida qilganman buni esa mustaqil qildim. 
   
   Xatolarga kelsak menga stackoverflow va boshqa saytlar muammoni yechishda yordam berdi loyihani yaxshilashga kelsak juda kop qoshimchalar qoshsa boladi masalan foydalanuvchi birorta yaqiniga qarz bersa va uni kiritib qoysa alohida sahida korish imkoni yaratish yana bank karta raqam qosha olash va karta tarixini korish bu faqat foydalanuvchining ozi foydalanishini taminlash ham zarur xavfsizlik jihatidan agar bunga davlat tomonidan cheklov bolmasa albatta xavfsizlik chorasi uchun foydalanuvchi birorta parol qoyadi va u parol yordamida kiradi 
