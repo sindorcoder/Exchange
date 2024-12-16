@@ -54,6 +54,6 @@ function generateDates(startYear: number, endYear: number) {
   return dates;
 }
 
-const startYear = 2023;
+const startYear = 2024;
 const endYear = 2030;
 export const allDates = generateDates(startYear, endYear);

@@ -4,6 +4,8 @@ import { useState } from "react";
 import ModalComponent from "../modal/Modal";
 import { filterData } from "../../helpers/";
 import { useGetCourseQuery } from "../../redux/api/getCourse";
+import CHartComponent from "../chart/Chart";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const [show, setShow] = useState(false);
@@ -11,6 +13,7 @@ const Main = () => {
   const handleShow = () => setShow(true);
   const { data } = useGetCourseQuery();
   const conversion: any = filterData(data);
+  const {totalAmount} = useSelector((state: any) => state.transaction);
 
   return (
     <>
@@ -42,6 +45,13 @@ const Main = () => {
                 <p>{item.rate}</p>
               </div>
             ))}
+          <div className="flex justify-end w-full items-center gap-3">
+            <h2 className="text-[30px]">Total Amount</h2>
+            <span className="mt-[1px]">{totalAmount}$</span>
+          </div>
+        </div>
+        <div>
+          <CHartComponent />
         </div>
       </section>
       <ModalComponent show={show} handleClose={handleClose} />
